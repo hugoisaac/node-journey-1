@@ -1,0 +1,23 @@
+{
+  "name": "web-api",
+  "version": "0.0.0",
+  "description": "REST API to perform operations on the domain model. This API should be accessed from the Web client.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HugoIsaac/node-journey-1.git"
+  },
+  "keywords": [
+    "rest",
+    "api"
+  ],
+  "author": "Hugo Ortiz <hugo.isaac@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HugoIsaac/node-journey-1/issues"
+  },
+  "homepage": "https://github.com/HugoIsaac/node-journey-1"
+}

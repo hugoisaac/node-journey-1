@@ -1,0 +1,51 @@
+## Frameworks / libraries / tools
+- Backend
+  - Node.js
+  - Restify
+- Frontend
+  - AngularJS
+  - Bootstrap
+  - http-server
+- Dev tools
+  - NPM
+  - Bower
+  - Grunt
+
+## Directory structure
+- /common
+- /model
+  - account.js
+  - model.js
+  - profile.js
+  - task.js
+  - package.json
+- /tools
+- /web-api
+  - /build
+  - /src
+    - /node_modules
+    - app.js
+  - package.json
+- /web-client
+  - /build
+  - /src
+    - /account
+      - controller.js
+      - model.js
+      - view.html
+    - /profile
+      - controller.js
+      - model.js
+      - view.html
+    - /tasks
+      - controller.js
+      - model.js
+      - view.html
+    - app.js
+    - index.html
+  - bower.js
+  - gruntfile.js
+- .gitignore
+- design.md
+- LICENSE
+- README.md
