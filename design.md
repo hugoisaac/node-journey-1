@@ -21,10 +21,8 @@
   - package.json
 - /tools
 - /web-api
-  - /build
-  - /src
-    - /node_modules
-    - app.js
+  - /node_modules
+  - app.js
   - package.json
 - /web-client
   - /build
