@@ -2,7 +2,7 @@
   "name": "model",
   "version": "0.0.0",
   "description": "Constructor functions that can be used to create the app domain objects (aka entities).",
-  "main": "model.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/HugoIsaac/node-journey-1/issues"
   },
-  "homepage": "https://github.com/HugoIsaac/node-journey-1"
+  "homepage": "https://github.com/HugoIsaac/node-journey-1",
+  "dependencies": {
+    "chai": "^1.10.0",
+    "lodash-node": "^2.4.1"
+  }
 }

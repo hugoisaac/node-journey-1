@@ -44,6 +44,7 @@
   - bower.js
   - gruntfile.js
 - .gitignore
+- .jshintrc
 - design.md
 - LICENSE
 - README.md

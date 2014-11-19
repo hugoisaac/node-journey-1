@@ -1,0 +1,15 @@
+{
+  // From https://github.com/Seravo/js-winning-style:
+  "camelcase" : true
+  , "indent": 2
+  , "undef": true
+  , "quotmark": "single"
+  , "maxlen": 80
+  , "trailing": true
+  , "curly": true
+  // Custom:
+  , "laxcomma": true
+  , "laxbreak": true
+  , "eqeqeq": true
+  , "unused": true
+}

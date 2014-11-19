@@ -4,6 +4,7 @@
   "description": "REST API to perform operations on the domain model. This API should be accessed from the Web client.",
   "main": "app.js",
   "scripts": {
+    "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/HugoIsaac/node-journey-1/issues"
   },
-  "homepage": "https://github.com/HugoIsaac/node-journey-1"
+  "homepage": "https://github.com/HugoIsaac/node-journey-1",
+  "dependencies": {
+    "bunyan": "^1.2.1",
+    "model": "0.0.0",
+    "restify": "^2.8.3"
+  }
 }
