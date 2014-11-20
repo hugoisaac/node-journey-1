@@ -1,25 +1,26 @@
-/*jshint node:true */
+/* jshint node:true */
 'use strict';
 
 var util = require('util');
 var restify = require('restify');
 var bunyan = require('bunyan');
 var model = require('model');
+var config = require('./config');
 
 var log = bunyan.createLogger({name: 'api-server'});
 
 var server = restify.createServer({
-  name: 'api'
+  name: 'api-server'
   // Setting server.log. NOTE: What's the advantage vs using logger directly?
   , log: log
   // Add **magic** to be able to send an html response.
   , formatters: {
     'text/html; q=0.5': function formatHtml(req, res, body) {
-      var htmlTemplate = '
-        <html>
-          <head>
-            <title>API response</title></head>
-          <body>%s</body>
+      var htmlTemplate = ' \
+        <html> \
+          <head> \
+            <title>API response</title></head> \
+          <body>%s</body> \
         </html>';
 
       if (body instanceof Error) {
@@ -39,15 +40,6 @@ var server = restify.createServer({
   }
 });
 
-// Adding auditLogger. GOTCHA: Logs when content is sent using server.get().
-// Doesn't work if response is written using server.use().
-// server.on('after', restify.auditLogger({
-//   log: bunyan.createLogger({
-//     name: 'api-audit'
-//     , stream: process.stdout
-//   })
-// }));
-
 // This is for adding handlers before routing (can change request headers).
 // req.params is undefined, and properties added to req.log are not available.
 // GOTCHA: Only runs when the resource is found? Failing on unexisting routes.
@@ -57,39 +49,21 @@ var server = restify.createServer({
 //   return next();
 // });
 
-// Add custom properties to req.log.
-// server.use(restify.requestLogger({
-//     properties: {
-//         customProperty: 'Custom property.'
-//         //, request: ''
-//     }
-//     // , serializers: {...}
-// }));
-
-// Add a common handler to log the request.
+// Extend bunyan request logger (req.log) to include additional info.
 // NOTE: It seems to only run when the resource is found (existing route).
-server.use(function (req, res, next) {
-  server.log.info({
-      serverAddress: server.address()
-      , serverName: server.name
-      , serverUrl: server.url
-    }
-    , 'Incoming request.'
-  );
+server.use(config.requestLogger);
 
-  return next();
-});
+// Add auditLogger. NOTE: Doesn't work if response is written using
+// server.use().
+server.on('after', config.auditLogger);
 
-server.get('/html', function (req, res, next) {
-  req.log.info({ route: arguments[0] }, 'Testing an HTML request. Simple.');
-
-  req.log.info({ request: req, route: arguments[0] }, 'Testing an HTML request. Request.');
-
-  console.log(req, '. Console.log(req).');
+// TODO: Find documentation about wildcards for defining routes (e.g. '/.*').
+server.get('/htmltest', function getHandler(req, res, next) {
+  req.log.info('Handling incoming request.');
 
   var responseBody = util.format('request: %s\nresponse: %s', req, res);
 
-  var responseBody = responseBody.replace(/\n/gi, '<br />');
+  responseBody = responseBody.replace(/\n/gi, '<br />');
 
   // This works thanks to the server.formatters *magic*.
   res.contentLength =  Buffer.byteLength(responseBody);
@@ -141,13 +115,6 @@ server.post('/account/:username/:password', function (req, res, next) {
 //   return next();
 // });
 
-server.listen(8080, function() {
-  console.log('%s listening at %s', server.name, server.url);
-  server.log.info({
-      serverAddress: server.address()
-      , serverName: server.name
-      , serverUrl: server.url
-    }
-    , 'API server now listening...'
-  );
+server.listen(config.port, function() {
+  server.log.info('Listening at %s', server.url);
 });

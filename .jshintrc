@@ -12,4 +12,5 @@
   , "laxbreak": true
   , "eqeqeq": true
   , "unused": true
+  , "multistr": true
 }
